@@ -55,8 +55,8 @@ exports.signin = (req, res) => {
           .cookie("token", token, {
             sameSite: "strict",
             path: "/",
-            expires: new Date(new Date().getTime() + 5 * 1000),
-            // expires: new Date(new Date().getTime() + 60 * 60 * 24 * 1000),
+            // expires: new Date(new Date().getTime() + 5 * 1000),
+            expires: new Date(new Date().getTime() + 60 * 60 * 24 * 1000),
             httpOnly: true,
             // secure: true,
           })

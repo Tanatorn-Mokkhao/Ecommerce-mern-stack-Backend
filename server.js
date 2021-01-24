@@ -7,7 +7,9 @@ const jwt = require("jsonwebtoken");
 // const { requiresignin } = require("./src/common-middleware/");
 // const userRoutes = require("./src/router/auth");
 const adminRoutes = require("./src/router/admin/auth");
-
+const categoryRoutes = require("./src/router/category");
+const initialRoutes = require("./src/router/initialData");
+const productRoutes = require("./src/router/product");
 const app = express();
 env.config();
 
@@ -25,11 +27,20 @@ mongoose
   });
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000", "http://localhost:3006"],
+  })
+);
+
 app.use(cookieParser());
 // app.use("/api", userRoutes);
+app.use("/public", express.static(__dirname + "/src/uploads"));
 app.use("/api", adminRoutes);
-
+app.use("/api", categoryRoutes);
+app.use("/api", initialRoutes);
+app.use("/api", productRoutes);
 // app.get("/", (req, res) => {
 //   const token = jwt.sign(
 //     { _id: "123456", role: "user" },

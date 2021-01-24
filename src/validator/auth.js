@@ -9,6 +9,10 @@ exports.validationsignup = [
   check("payload.userName").notEmpty().withMessage("please fill userName"),
   check("payload.email").notEmpty().withMessage("please fill Email"),
   check("payload.email").isEmail().withMessage("valid Email is required"),
+  check("payload.password").notEmpty().withMessage("please fill password"),
+  check("payload.password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 character long"),
 ];
 
 exports.isRequestValidated = (req, res, next) => {
