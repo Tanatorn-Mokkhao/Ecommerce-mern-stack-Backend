@@ -102,7 +102,9 @@ exports.getProductsByslug = async (req, res) => {
               return res.status(200).json({ product: product.flat(1) });
             } else {
               Product.find({ category: category._id })
-                .select("_id name quantity price description category picture")
+                .select(
+                  "_id name slug quantity price description category picture"
+                )
                 .exec((error, product) => {
                   if (error) return res.status(400).json({ error });
                   if (product) {
@@ -119,6 +121,16 @@ exports.getProductsByslug = async (req, res) => {
 exports.getAllProduct = (req, res) => {
   Product.find({}).exec((error, product) => {
     if (error) return res.status(400), json({ error });
+    if (product) {
+      return res.status(200).json({ product });
+    }
+  });
+};
+
+exports.getProductDetails = (req, res) => {
+  const { productid } = req.params;
+  Product.findOne({ _id: productid }).exec((error, product) => {
+    if (error) return res.status(400).json({ error });
     if (product) {
       return res.status(200).json({ product });
     }

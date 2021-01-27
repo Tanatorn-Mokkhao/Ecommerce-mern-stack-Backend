@@ -5,11 +5,13 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 // const { requiresignin } = require("./src/common-middleware/");
-// const userRoutes = require("./src/router/auth");
+const userRoutes = require("./src/router/auth");
 const adminRoutes = require("./src/router/admin/auth");
 const categoryRoutes = require("./src/router/category");
 const initialRoutes = require("./src/router/initialData");
 const productRoutes = require("./src/router/product");
+const cartRoutes = require("./src/router/cart");
+const addressRoutes = require("./src/router/address");
 const app = express();
 env.config();
 
@@ -35,12 +37,14 @@ app.use(
 );
 
 app.use(cookieParser());
-// app.use("/api", userRoutes);
+app.use("/api", userRoutes);
 app.use("/public", express.static(__dirname + "/src/uploads"));
 app.use("/api", adminRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", initialRoutes);
 app.use("/api", productRoutes);
+app.use("/api", cartRoutes);
+app.use("/api", addressRoutes);
 // app.get("/", (req, res) => {
 //   const token = jwt.sign(
 //     { _id: "123456", role: "user" },

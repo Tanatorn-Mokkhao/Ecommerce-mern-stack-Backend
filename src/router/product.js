@@ -10,6 +10,7 @@ const {
   deleteProduct,
   getProductsByslug,
   getAllProduct,
+  getProductDetails,
 } = require("../controller/product");
 
 const storage = multer.diskStorage({
@@ -37,5 +38,7 @@ router.post("/delete/product", deleteProduct);
 router.post("/product/:slug", getProductsByslug);
 
 router.post("/get/all/product", getAllProduct);
+
+router.post("/product/id/:productid", getProductDetails);
 
 module.exports = router;
