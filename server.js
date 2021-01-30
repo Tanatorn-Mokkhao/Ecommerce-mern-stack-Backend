@@ -12,6 +12,8 @@ const initialRoutes = require("./src/router/initialData");
 const productRoutes = require("./src/router/product");
 const cartRoutes = require("./src/router/cart");
 const addressRoutes = require("./src/router/address");
+const orderRoutes = require("./src/router/order");
+const dashBoardRoutes = require("./src/router/admin/dashboard");
 const app = express();
 env.config();
 
@@ -45,6 +47,8 @@ app.use("/api", initialRoutes);
 app.use("/api", productRoutes);
 app.use("/api", cartRoutes);
 app.use("/api", addressRoutes);
+app.use("/api", orderRoutes);
+app.use("/api", dashBoardRoutes);
 // app.get("/", (req, res) => {
 //   const token = jwt.sign(
 //     { _id: "123456", role: "user" },
