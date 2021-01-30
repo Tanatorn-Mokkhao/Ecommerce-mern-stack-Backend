@@ -136,3 +136,18 @@ exports.getProductDetails = (req, res) => {
     }
   });
 };
+
+exports.upDateProduct = (req, res) => {
+  const { payload } = req.body;
+  console.log(payload);
+  Product.findOneAndUpdate(
+    { _id: payload._id },
+    { $set: payload },
+    { new: true }
+  ).exec((error, product) => {
+    if (error) return res.status(400).json({ error });
+    if (product) {
+      return res.status(200).json({ product });
+    }
+  });
+};
